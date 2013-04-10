@@ -26,7 +26,7 @@ body{
 #shareLinkImage{
   position:fixed;
   top:0;
-  right: 0;
+  right: 20px;
 }
 
 /* Height / width / positioning can be customized for your use case.
