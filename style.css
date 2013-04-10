@@ -23,6 +23,12 @@ body{
   margin-bottom: 25px;
 }
 
+#shareLinkImage{
+  position:fixed;
+  top:0;
+  right: 0;
+}
+
 /* Height / width / positioning can be customized for your use case.
 For demo purposes, we make the user list 175px and firepad fill the rest of the page. */
 .firepad-userlist {
