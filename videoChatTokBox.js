@@ -1,3 +1,5 @@
+var videoResolution = {width: 200, height: 150};
+
 window.TBStart = function(apiKey, parentDiv){
   this.loadJS = function(){
     var fileref=document.createElement('script')
@@ -36,7 +38,7 @@ window.TBStart = function(apiKey, parentDiv){
       self.apiKey = e.apiKey;
       self.session_id = e.session_id;
       self.token = e.token;
-      self.publisher = TB.initPublisher( "25740492", did );
+      self.publisher = TB.initPublisher( "25740492", did, videoResolution );
       self.session = TB.initSession( self.session_id );
 
       self.session.addEventListener( 'sessionConnected', self.sessionConnectedHandler );
@@ -74,7 +76,7 @@ window.TBStart = function(apiKey, parentDiv){
       div.style.display="inline-block";
       document.getElementById( self.parentDiv ).appendChild( div );
 
-      self.session.subscribe( streams[i], div.id );
+      self.session.subscribe( streams[i], div.id, videoResolution );
     }
   };
   
