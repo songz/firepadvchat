@@ -3,8 +3,77 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
+  <!-- Include Firebase -->
+  <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+
+  <!-- Include CodeMirror -->
+  <script src="codemirror/lib/codemirror.js"></script>
+  <link rel="stylesheet" href="codemirror/lib/codemirror.css" />
+
+  <!-- Include Firepad -->
+  <script src="firepad.js"></script>
+  <link rel="stylesheet" href="firepad.css" />
+
+  <!-- Include example userlist. -->
+  <script src="firepad-userlist.js"></script>
+  <link rel="stylesheet" href="firepad-userlist.css" />
+
+  <!-- Include custom CSS -->
+  <link rel="stylesheet" href="style.css" />
+
 </head>
 <body>
-  <h1>Hello World</h1>
+  <div id="logoContainer">
+    <img src="firepad_logo.png" alt="" />
+  </div>
+  <div id="subTitle">Collaborative Text Editing with Video Chat</div>
+
+  <div id="githubButton">
+    <a href="https://github.com/songz/firepadvchat">
+      <img src="http://www.firepad.io/images/download.png" alt="" />
+    </a>
+  </div>
+
+  <div id="firepadContainer">
+    <div id="userlist"></div>
+    <div id="firepad"></div>
+  </div>
+
+  <script>
+    //// Initialize Firebase.
+    // var firepadRef = new Firebase('<YOUR FIREBASE URL>');
+    var ref = new Firebase('https://firepad.firebaseio-demo.com');
+    var hash = window.location.hash.replace(/#/g, '');
+    if (hash) {
+      ref = ref.child(hash);
+    } else {
+      ref = ref.push(); // generate unique location.
+      window.location = window.location + '#' + ref.name(); // add it as a hash to the URL.
+    }
+    var firepadRef = ref;
+
+    //// Create CodeMirror (with lineWrapping on).
+    var codeMirror = CodeMirror(document.getElementById('firepad'), { lineWrapping: true });
+
+    // Create a random ID to use as our user ID (we must give this to firepad and FirepadUserList).
+    var userId = Math.floor(Math.random() * 9999999999).toString();
+
+    //// Create Firepad (with rich text features and our desired userId).
+    var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror,
+        { richTextToolbar: true, richTextShortcuts: true, userId: userId});
+
+    //// Create FirepadUserList (with our desired userId).
+    var firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'),
+        document.getElementById('userlist'), userId);
+
+    //// Initialize contents.
+    firepad.on('ready', function() {
+      if (firepad.isHistoryEmpty()) {
+        firepad.setText('Check out the user list to the left!');
+      }
+    });
+
+    //// Initialize OpenTok
+  </script>
 </body>
 </html>
