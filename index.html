@@ -18,6 +18,8 @@
   <script src="firepad-userlist.js"></script>
   <link rel="stylesheet" href="firepad-userlist.css" />
 
+  <script src="videoChatTokBox.js" type="text/javascript"></script>
+
   <!-- Include custom CSS -->
   <link rel="stylesheet" href="style.css" />
 
@@ -37,6 +39,7 @@
   <div id="firepadContainer">
     <div id="userlist"></div>
     <div id="firepad"></div>
+    <div id="opentokVideos" style=""></div>
   </div>
 
   <script>
@@ -74,6 +77,8 @@
     });
 
     //// Initialize OpenTok
+    a = new TBStart("1127", "opentokVideos");
+    a.startVideo();
   </script>
 </body>
 </html>

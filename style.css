@@ -30,8 +30,13 @@ For demo purposes, we make the user list 175px and firepad fill the rest of the 
   width: 175px;
 }
 .firepad {
-  position: absolute; left: 175px; top: 0; bottom: 0; right: 0; height: auto;
+  position: absolute; left: 175px; top: 0; bottom: 0; right: 200px; height: auto;
 }
+#opentokVideos{
+  position: absolute; 175px; top: 0; bottom: 0; right: 0; height: auto;
+  width:200px;
+}
+
 #firepadContainer{
   width: 1024px;
   height: 700px;
